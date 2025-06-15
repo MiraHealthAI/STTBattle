@@ -48,4 +48,13 @@ export type MessageType =
   | 'broadcast' 
   | 'broadcast-message' 
   | 'welcome' 
-  | 'error'; 
+  | 'error';
+
+export interface STTModel {
+  id: string;
+  name: string;
+  provider: string;
+  providerId: string;
+  type: string;
+  description?: string;
+} 

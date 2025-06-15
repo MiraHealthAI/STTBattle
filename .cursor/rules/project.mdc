@@ -3,6 +3,32 @@ description:
 globs: 
 alwaysApply: true
 ---
+1. Project Vision & Goals
+The goal is to create a web-based "Speech-to-Text (STT) Comparator" application. This tool will allow users to test multiple real-time STT services simultaneously in a side-by-side view, designed to be run locally as an open-source project.
+Real-Time Comparison: Provide immediate visual feedback from multiple transcription engines as the user speaks.
+Configurability: Allow users to easily select which STT models to activate and configure their specific settings (e.g., language, specialty models).
+Extensibility: Design a modular architecture that makes it simple to integrate new STT providers in the future without a major rewrite.
+Usability: Create a clean, intuitive interface that focuses on the core task of comparison.
+2. Core Features
+Main Dashboard: A grid or column-based layout where each active STT model has its own dedicated panel.
+Transcription Panels: Each panel will display the interim and final transcription results from its corresponding model.
+Master Controls: A central control bar with a "Start/Stop Recording" button that controls all active models at once.
+Settings Modal: A pop-up or sidebar for model selection and configuration.
+Status Indicators: Visual cues to show the status of each model (e.g., connecting, listening, error).
+Target STT Providers
+This is the initial list of providers to be integrated. The architecture will be designed to easily accommodate more in the future.
+Google Cloud Speech-to-Text (with support for medical models)
+AWS Transcribe (with support for Amazon Transcribe Medical)
+Microsoft Azure Speech-to-Text
+Deepgram Speech-to-Text (e.g., Nova-3 Medical)
+OpenAI Realtime API (e.g., Whisper models)
+3. Proposed Technical Architecture
+Frontend Framework: Next.js. We will leverage Next.js and React for building a modern, fast, and interactive user interface.
+UI Components: shadcn/ui. We will use shadcn/ui for pre-built, accessible, and themeable components. It is built on top of Tailwind CSS, which we will use for utility-first styling.
+Real-time Backend Server: A standalone Node.js server using a robust library like ws or socket.io. This is the most critical architectural decision. A dedicated, stateful server is required to maintain persistent WebSocket connections for streaming audio, which is not suitable for a serverless environment.
+API Key Management: API keys will be managed securely in a .env.local file, loaded only by the standalone Node.js backend server. They will never be exposed to the browser.
+Communication: The Next.js frontend will communicate with the standalone Node.js backend via a WebSocket connection. The backend will act as a secure proxy, managing all parallel streams to the various cloud STT providers.
+
 Limit frivolous comments when generating code. 
 
 Before creating a new interface always check if the interface already exists in the codebase.

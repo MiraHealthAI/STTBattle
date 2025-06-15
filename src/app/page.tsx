@@ -6,6 +6,7 @@ import ControlBar from '@/components/ControlBar';
 import Settings from '@/components/Settings';
 import TranscriptionPanel, { type TranscriptionStatus, type STTProvider } from '@/components/TranscriptionPanel';
 import { STTModel } from '@shared/types';
+import { useMicrophoneAudio } from '@/hooks/useMicrophoneAudio';
 
 interface TranscriptionState {
   [modelId: string]: {
@@ -21,6 +22,21 @@ export default function Home() {
   const [models, setModels] = useState<STTModel[]>([]);
   const [selectedModels, setSelectedModels] = useState<string[]>([]);
   const [transcriptionStates, setTranscriptionStates] = useState<TranscriptionState>({});
+
+  const { start: startMic, stop: stopMic } = useMicrophoneAudio({
+    onAudioChunk: (chunk) => {
+      // For now, just log chunk info
+      console.log('Audio chunk', chunk.length, 'bytes');
+    }
+  });
+
+  useEffect(() => {
+    if (isRecording) {
+      startMic();
+    } else {
+      stopMic();
+    }
+  }, [isRecording, startMic, stopMic]);
 
   // Fetch models on mount
   useEffect(() => {

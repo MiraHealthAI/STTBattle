@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "new-york",
+  "rsc": true,
+  "tsx": true,
+  "tailwind": {
+    "config": "",
+    "css": "src/app/globals.css",
+    "baseColor": "slate",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "aliases": {
+    "components": "sttbattle/components",
+    "utils": "sttbattle/lib/utils",
+    "ui": "sttbattle/components/ui",
+    "lib": "sttbattle/lib",
+    "hooks": "sttbattle/hooks"
+  },
+  "iconLibrary": "lucide"
+}

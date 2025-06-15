@@ -1,0 +1,16 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+Limit frivolous comments when generating code. 
+
+Before creating a new interface always check if the interface already exists in the codebase.
+
+# Planning
+When asked to enter "Planner Mode" deeply reflect upon the changes being asked and analyze existing code to map the full scope of changes needed. This means you should understand the code before asking questions. Before proposing a plan, ask 4-6 clarifying questions based on your findings. Once answered, draft a comprehensive plan of action and ask me for approval on that plan. Once approved, implement all steps in that plan. After completing each phase/step, mention what was just completed and what the next steps are + phases remaining after these steps
+# Coding
+ - Always use absolute import when importing modules unless it is in the same directory then you can use relative imports. 
+ - Do not create an index.ts to do exports for a package unless explicitly told to do so
+ - If creating a new interface or type check if it is already defined. If you must define it consider using zod if the interface is going to be shared between the front-end and backend. Also consider placing it in the packages/types directory.
+ - Do not import and immediately export a value for reasons like backwards compatilibility unless explicitly told to do so. 

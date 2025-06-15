@@ -2,6 +2,10 @@ import { WebSocketServer, WebSocket } from 'ws';
 import { createServer } from 'http';
 import * as dotenv from 'dotenv';
 import { WebSocketMessage } from '@shared/types';
+import express from 'express';
+import cors from 'cors';
+import { sttModels } from './models';
+import type { Request, Response } from 'express';
 
 // Load environment variables
 dotenv.config();
@@ -111,6 +115,17 @@ wss.on('connection', (ws: WebSocket, request) => {
     clients.delete(ws);
   });
 });
+
+const app = express();
+app.use(cors());
+
+// REST endpoint for models
+app.get('/models', (req: Request, res: Response) => {
+  res.json(sttModels);
+});
+
+// Attach express app to the same HTTP server
+server.on('request', app);
 
 // Start the server
 server.listen(PORT, () => {
